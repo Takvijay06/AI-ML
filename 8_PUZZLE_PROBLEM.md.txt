@@ -1,0 +1,224 @@
+# 8_PUZZLE_PROBLEM(WITHOUT_OBJECT)
+
+#VARIABLE AND LIST
+intial=[2,8,3,1,6,4,7,0,5]
+i1=[]
+pos_0=0
+final=[1,2,3,8,0,4,7,6,5]
+flag=-1
+move=0
+t_cost=0
+cost=[10,10,10,10]
+
+#FUNCTION ON PUZZLES
+def move_top():
+    if((pos_0 - 3) >= 0):
+        global i2
+        global cost
+        i2=[0,0,0,0,0,0,0,0,0]
+        i2[0]=intial[0]
+        i2[1]=intial[1]
+        i2[2]=intial[2]
+        i2[3]=intial[3]
+        i2[4]=intial[4]
+        i2[5]=intial[5]
+        i2[6]=intial[6]
+        i2[7]=intial[7]
+        i2[8]=intial[8]
+        i2[pos_0 - 3]=intial[pos_0]
+        i2[pos_0]=intial[pos_0 - 3]
+        
+        c=calculate_cost(i2)
+        
+        if i2 not in i1:
+            i1.append(i2)
+            cost[0]=c
+            
+    else:
+        i1.append([10,10,10,10,10,10,10,10,10])
+    
+        
+def move_down():
+    if((pos_0 + 3) <= 8):
+        global i2
+        global cost
+        i2=[0,0,0,0,0,0,0,0,0]
+        i2[0]=intial[0]
+        i2[1]=intial[1]
+        i2[2]=intial[2]
+        i2[3]=intial[3]
+        i2[4]=intial[4]
+        i2[5]=intial[5]
+        i2[6]=intial[6]
+        i2[7]=intial[7]
+        i2[8]=intial[8]
+        i2[pos_0 + 3]=intial[pos_0]
+        i2[pos_0]=intial[pos_0+3]
+        
+        c=calculate_cost(i2)
+        
+        if i2 not in i1:
+            i1.append(i2)
+            cost[1]=c
+            
+    else:
+        i1.append([10,10,10,10,10,10,10,10,10])
+
+        
+        
+def move_right():
+    if(pos_0 % 3 != 2):
+        global i2
+        global cost
+        i2=[0,0,0,0,0,0,0,0,0]
+        i2[0]=intial[0]
+        i2[1]=intial[1]
+        i2[2]=intial[2]
+        i2[3]=intial[3]
+        i2[4]=intial[4]
+        i2[5]=intial[5]
+        i2[6]=intial[6]
+        i2[7]=intial[7]
+        i2[8]=intial[8]
+        i2[pos_0 + 1]=intial[pos_0]
+        i2[pos_0]=intial[pos_0+1]
+        
+        c=calculate_cost(i2)
+        
+        if i2 not in i1:
+            i1.append(i2)
+            cost[2]=c
+        
+    else:
+        i1.append([10,10,10,10,10,10,10,10,10])
+        
+        
+        
+def move_left():
+    if(pos_0 % 3 != 0):
+        global i2
+        global cost
+        i2=[0,0,0,0,0,0,0,0,0]
+        i2[0]=intial[0]
+        i2[1]=intial[1]
+        i2[2]=intial[2]
+        i2[3]=intial[3]
+        i2[4]=intial[4]
+        i2[5]=intial[5]
+        i2[6]=intial[6]
+        i2[7]=intial[7]
+        i2[8]=intial[8]
+        i2[pos_0-1]=intial[pos_0]
+        i2[pos_0]=intial[pos_0-1]
+        
+        c=calculate_cost(i2)
+        
+        if i2 not in i1:
+            i1.append(i2)
+            cost[3]=c
+    else:
+        i1.append([10,10,10,10,10,10,10,10,10])
+        
+def min_cost(cost):
+    minimum = cost[0]
+    global flag
+    global t_cost
+    global intial
+    flag=0
+    for i in range(1,len(cost)):
+        if(minimum>cost[i]):
+            minimum=cost[i]
+            flag=i
+        
+    #for i in range(0,len(cost)):
+        #count=0
+        #p=[]
+        #if(cost[i]==cost[z]):
+         #   count=count+1
+          #  if(i!=z):
+           #     p.append(i)
+        
+            
+        
+    t_cost=t_cost+minimum
+    print(intial)
+    if(len(i1)==1):
+        intial = i1[0]
+    else:
+        intial = i1[flag]
+        
+def calculate_cost(i2):
+    c=0
+    for i in range(0,9):
+        if(i2[i]!=final[i] and i2[i]!=0):
+            c=c+1
+    return c
+
+def find_pos_0(intial):
+    global pos_0  
+    for i in range(len(intial)):
+        if intial[i]==0:
+            pos_0=i
+            
+def create_case(intial,flag):
+    global i1
+    if(flag==-1):
+        move_top() #0
+        move_down() #1
+        move_right() #2
+        move_left() #3
+
+    if(flag==0):
+        move_top() #0
+        i1.append([10,10,10,10,10,10,10,10,10]) #1
+        move_right() #2
+        move_left() #3
+
+    if(flag==1):
+        i1.append([10,10,10,10,10,10,10,10,10]) #0
+        move_down() #1
+        move_right() #2
+        move_left() #3
+
+    if(flag==2):
+        move_top() #0
+        move_down() #1
+        move_right() #2
+        i1.append([10,10,10,10,10,10,10,10,10]) #3
+
+    if(flag==3):
+        move_top() #0
+        move_down() #1
+        i1.append([10,10,10,10,10,10,10,10,10]) #2
+        move_left() #3
+
+#FINDING THE SOLUTION
+print("HERE WE START THE GAME")
+print("-----------------------------------")
+while(intial!=final):
+    find_pos_0(intial)
+    cost=[10,10,10,10]
+    i1=[]
+
+    create_case(intial,flag)
+
+    min_cost(cost)
+    move=move+1
+    
+    if(flag==0):
+        print("MOVE BLANK SPACE TO TOP")
+        
+    if(flag==1):
+        print("MOVE BLANK SPACE TO DOWN")
+        
+    if(flag==2):
+        print("MOVE BLANK SPACE TO RIGHT")
+        
+    if(flag==3):
+        print("MOVE BLANK SPACE TO LEFT")
+print("-----------------------------------")
+print("\n")
+print("WE REACH AT GOAL STATE: ",intial)
+print("TOTAL_MOVES = ",move)
+
+
