@@ -1,0 +1,408 @@
+# MISSIONARIES AND CANNIBALS PROBLEM
+
+# CREATE A CLASS
+class graph:
+    n=0
+    C1=int()
+    M1=int()
+    Bank=int()
+    B1=int()
+    B2=int()
+    C2=int()
+    M2=int()
+    p=int()
+
+case=[[3,3,1,0,0,0,0]] #FIRST OBJECT AS IT IS ON FIRST BANK
+obj={}
+obj[graph.n]=graph()
+obj[graph.n].C1=3
+obj[graph.n].M1=3
+obj[graph.n].Bank=1
+obj[graph.n].B1=0
+obj[graph.n].B2=0
+obj[graph.n].C2=0
+obj[graph.n].M2=0
+obj[graph.n].p = -1
+
+#FUNCTION OF OPERATION ON BOAT
+
+def CM(parent=int()): #TO CARRY ONE MISSIONARY AND ONE CANNIBAL TO BOAT ON BANK 1
+    l=len(case)
+    for i in range(0,l): 
+        c=case[i]
+        j=[0,0,0,0,0,0,0]
+        if(c[2]==1):
+            if((c[0]-1)<=(c[1]-1)) and (c[0]-1)>=0 and (c[1]-1)>=0 and (c[0]+c[3]+c[5])==3 and (c[1]+c[4]+c[6])==3 and ((c[3]+c[5])<=(c[4]+c[6])):
+                j[0]=c[0]-1
+                j[1]=c[1]-1
+                j[3]=1
+                j[4]=1
+                j[5]=c[5]
+                j[6]=c[6]
+                j[2]=c[2]
+                if (j not in case) and (j[0]+j[3]+j[5])==3 and (j[1]+j[4]+j[6])==3 and ((j[3]+j[5])<=(j[4]+j[6])):
+                    case.append(j)
+                    graph.n=graph.n+1
+                    obj[graph.n]=graph()
+                    obj[graph.n].C1=j[0]
+                    obj[graph.n].M1=j[1]
+                    obj[graph.n].Bank=j[2]
+                    obj[graph.n].B1=j[3]
+                    obj[graph.n].B2=j[4]
+                    obj[graph.n].C2=j[5]
+                    obj[graph.n].M2=j[6]
+                    parent=i
+                    obj[graph.n].p=parent
+                    
+        elif(c[2]==0):
+            if(((c[0]-1)<=(c[1]-1)) and (c[0]-1)>=0 and (c[1]-1)>=0 and (c[0]+c[3]+c[5])==3 and (c[1]+c[4]+c[6])==3) and ((c[3]+c[0])<=(c[4]+c[1])):
+                j[0]=c[0]-1
+                j[1]=c[1]-1
+                j[3]=1
+                j[4]=1
+                j[5]=c[5]
+                j[6]=c[6]
+                j[2]=c[2]
+                
+                if (j not in case) and (j[0]+j[3]+j[5])==3 and (j[1]+j[4]+j[6])==3 and ((j[3]+j[0])<=(j[4]+j[1])):
+                    case.append(j)
+                    graph.n=graph.n+1
+                    obj[graph.n]=graph()
+                    obj[graph.n].C1=j[0]
+                    obj[graph.n].M1=j[1]
+                    obj[graph.n].Bank=j[2]
+                    obj[graph.n].B1=j[3]
+                    obj[graph.n].B2=j[4]
+                    obj[graph.n].C2=j[5]
+                    obj[graph.n].M2=j[6]
+                    parent=i
+                    obj[graph.n].p=parent
+
+def MM(parent=int()): #TO CARRY TWO MISSIONARIES TO BOAT ON BANK 1
+    l=len(case)
+    for i in range(0,l): 
+        c=case[i]
+        j=[0,0,0,0,0,0,0]
+        if(c[2]==1):
+            if((c[0])<=(c[1]-2)) and c[0]>=0 and (c[1]-2)>=0 and (c[0]+c[3]+c[5])==3 and (c[1]+c[4]+c[6])==3 and ((c[3]+c[5])<=(c[4]+c[6])):
+                j[0]=c[0]
+                j[1]=c[1]-2
+                j[3]=0
+                j[4]=2
+                j[5]=c[5]
+                j[6]=c[6]
+                j[2]=c[2]
+                
+                if (j not in case) and (j[0]+j[3]+j[5])==3 and (j[1]+j[4]+j[6])==3 and ((j[3]+j[5])<=(j[4]+j[6])):
+                    case.append(j)
+                    graph.n=graph.n+1
+                    obj[graph.n]=graph()
+                    obj[graph.n].C1=j[0]
+                    obj[graph.n].M1=j[1]
+                    obj[graph.n].Bank=j[2]
+                    obj[graph.n].B1=j[3]
+                    obj[graph.n].B2=j[4]
+                    obj[graph.n].C2=j[5]
+                    obj[graph.n].M2=j[6]
+                    parent=i
+                    obj[graph.n].p=parent
+                    
+        elif(c[2]==0):
+            if((c[0])<=(c[1]-2)) and c[0]>=0 and (c[1]-2)>=0 and (c[0]+c[3]+c[5])==3 and (c[1]+c[4]+c[6])==3 and ((c[3]+c[0])<=(c[4]+c[1])):
+                j[0]=c[0]
+                j[1]=c[1]-2
+                j[3]=0
+                j[4]=2
+                j[5]=c[5]
+                j[6]=c[6]
+                j[2]=c[2]
+                
+                if (j not in case) and (j[0]+j[3]+j[5])==3 and (j[1]+j[4]+j[6])==3 and ((j[3]+j[0])<=(j[4]+j[1])):
+                    case.append(j)
+                    graph.n=graph.n+1
+                    obj[graph.n]=graph()
+                    obj[graph.n].C1=j[0]
+                    obj[graph.n].M1=j[1]
+                    obj[graph.n].Bank=j[2]
+                    obj[graph.n].B1=j[3]
+                    obj[graph.n].B2=j[4]
+                    obj[graph.n].C2=j[5]
+                    obj[graph.n].M2=j[6]
+                    parent=i
+                    obj[graph.n].p=parent
+            
+def CC(parent=int()): #TO CARRY ONE CANNIBALS TO BOAT ON BANK 1
+    l=len(case)
+    for i in range(0,l): 
+        c=case[i]
+        j=[0,0,0,0,0,0,0]
+        if(c[2]==1):
+            if((c[0]-2)<=(c[1])) and (c[0]-2)>=0 and c[1]>=0 and (c[0]+c[3]+c[5])==3 and (c[1]+c[4]+c[6])==3 and ((c[3]+c[5])<=(c[4]+c[6])):
+                j[0]=c[0]-2
+                j[1]=c[1]
+                j[3]=2
+                j[4]=0
+                j[5]=c[5]
+                j[6]=c[6]
+                j[2]=c[2]
+                
+                if (j not in case) and (j[0]+j[3]+j[5])==3 and (j[1]+j[4]+j[6])==3 and ((j[3]+j[5])<=(j[4]+j[6])):
+                    case.append(j)
+                    graph.n=graph.n+1
+                    obj[graph.n]=graph()
+                    obj[graph.n].C1=j[0]
+                    obj[graph.n].M1=j[1]
+                    obj[graph.n].Bank=j[2]
+                    obj[graph.n].B1=j[3]
+                    obj[graph.n].B2=j[4]
+                    obj[graph.n].C2=j[5]
+                    obj[graph.n].M2=j[6]
+                    parent=i
+                    obj[graph.n].p=parent
+
+        elif(c[2]==0):
+            if(((c[0]-2)<=(c[1])) and(c[0]-2)>=0 and c[1]>=0 and (c[0]+c[3]+c[5])==3 and (c[1]+c[4]+c[6])==3) and ((c[3]+c[0])<=(c[4]+c[1])):
+                j[0]=c[0]-2
+                j[1]=c[1]
+                j[3]=2
+                j[4]=0
+                j[5]=c[5]
+                j[6]=c[6]
+                j[2]=c[2]
+                
+                if (j not in case) and (j[0]+j[3]+j[5])==3 and (j[1]+j[4]+j[6])==3 and ((j[3]+j[0])<=(j[4]+j[1])):
+                    case.append(j)
+                    graph.n=graph.n+1
+                    obj[graph.n]=graph()
+                    obj[graph.n].C1=j[0]
+                    obj[graph.n].M1=j[1]
+                    obj[graph.n].Bank=j[2]
+                    obj[graph.n].B1=j[3]
+                    obj[graph.n].B2=j[4]
+                    obj[graph.n].C2=j[5]
+                    obj[graph.n].M2=j[6]
+                    parent=i
+                    obj[graph.n].p=parent
+
+def to_another_bank(parent=int()): #TO MOVE THE BOAT FROM ONE BANK TO ANOTHER 
+    l=len(case)
+    for i in range(0,l): 
+        z=case[i]
+        k=[0,0,0,0,0,0,0]
+        k[0]=z[0]
+        k[1]=z[1]
+        k[3]=z[3]
+        k[4]=z[4]
+        k[5]=z[5]
+        k[6]=z[6]
+        
+        if z[2]==1:
+            k[2]=0
+        else:
+            k[2]=1
+            
+        if (k not in case) and (k[0]+k[3]+k[5])==3 and (k[1]+k[4]+k[6])==3:
+            case.append(k)
+            graph.n=graph.n+1
+            obj[graph.n]=graph()
+            obj[graph.n].C1=k[0]
+            obj[graph.n].M1=k[1]
+            obj[graph.n].Bank=k[2]
+            obj[graph.n].B1=k[3]
+            obj[graph.n].B2=k[4]
+            obj[graph.n].C2=k[5]
+            obj[graph.n].M2=k[6]
+            parent=i
+            obj[graph.n].p=parent
+            
+def put_cannibal_at_0(parent=int()): #DROP ON ONE CANNIBAL TO THE BANK 0 
+    l=len(case)
+    for i in range(0,l): 
+        z=case[i]
+        k=[0,0,0,0,0,0,0]
+        k[0]=z[0]
+        k[1]=z[1]
+        k[2]=z[2]
+        k[4]=z[4]
+        k[6]=z[6]
+        if(z[3]>0):
+            k[3]=z[3]-1
+            k[5]=z[5]+1
+            if (k not in case) and (k[0]+k[3]+k[5])==3 and (k[1]+k[4]+k[6])==3:
+                case.append(k)
+                graph.n=graph.n+1
+                obj[graph.n]=graph()
+                obj[graph.n].C1=k[0]
+                obj[graph.n].M1=k[1]
+                obj[graph.n].Bank=k[2]
+                obj[graph.n].B1=k[3]
+                obj[graph.n].B2=k[4]
+                obj[graph.n].C2=k[5]
+                obj[graph.n].M2=k[6]
+                parent=i
+                obj[graph.n].p=parent
+            
+def put_cannibal_at_1(parent=int()): #DROP ON ONE CANNIBAL TO THE BANK 1 
+    l=len(case)
+    for i in range(0,l): 
+        z=case[i]
+        k=[0,0,0,0,0,0,0]
+        k[0]=z[0]
+        k[1]=z[1]
+        k[2]=z[2]
+        k[4]=z[4]
+        k[6]=z[6]
+        if(z[3]>0):
+            k[3]=z[3]-1
+            k[0]=z[0]+1
+            if (k not in case) and (k[0]+k[3]+k[5])==3 and (k[1]+k[4]+k[6])==3:
+                case.append(k)
+                graph.n=graph.n+1
+                obj[graph.n]=graph()
+                obj[graph.n].C1=k[0]
+                obj[graph.n].M1=k[1]
+                obj[graph.n].Bank=k[2]
+                obj[graph.n].B1=k[3]
+                obj[graph.n].B2=k[4]
+                obj[graph.n].C2=k[5]
+                obj[graph.n].M2=k[6]
+                parent=i
+                obj[graph.n].p=parent
+            
+def put_missionary_at_0(parent=int()): #DROP ON ONE MISSIONARY TO THE BANK 0 
+    l=len(case)
+    for i in range(0,l): 
+        z=case[i]
+        k=[0,0,0,0,0,0,0]
+        k[0]=z[0]
+        k[1]=z[1]
+        k[2]=z[2]
+        k[3]=z[3]
+        k[5]=z[5]
+        if(z[4]>0):
+            k[4]=z[4]-1
+            k[6]=z[6]+1
+            if (k not in case) and (k[0]+k[3]+k[5])==3 and (k[1]+k[4]+k[6])==3:
+                case.append(k)
+                graph.n=graph.n+1
+                obj[graph.n]=graph()
+                obj[graph.n].C1=k[0]
+                obj[graph.n].M1=k[1]
+                obj[graph.n].Bank=k[2]
+                obj[graph.n].B1=k[3]
+                obj[graph.n].B2=k[4]
+                obj[graph.n].C2=k[5]
+                obj[graph.n].M2=k[6]
+                parent=i
+                obj[graph.n].p=parent
+            
+def put_missionary_at_1(parent=int()):#DROP ON ONE MISSIONARY TO THE BANK 1
+    l=len(case)
+    for i in range(0,l): 
+        z=case[i]
+        k=[0,0,0,0,0,0,0]
+        k[0]=z[0]
+        k[1]=z[1]
+        k[2]=z[2]
+        k[3]=z[3]
+        k[5]=z[5]
+        if(z[4]>0):
+            k[4]=z[4]-1
+            k[1]=z[1]+1
+            if (k not in case) and (k[0]+k[3]+k[5])==3 and (k[1]+k[4]+k[6])==3:
+                case.append(k)
+                graph.n=graph.n+1
+                obj[graph.n]=graph()
+                obj[graph.n].C1=k[0]
+                obj[graph.n].M1=k[1]
+                obj[graph.n].Bank=k[2]
+                obj[graph.n].B1=k[3]
+                obj[graph.n].B2=k[4]
+                obj[graph.n].C2=k[5]
+                obj[graph.n].M2=k[6]
+                parent=i
+                obj[graph.n].p=parent
+   
+def put_2C_1M_at_0(parent=int()): # DROP TWO CANNIBALS TO BANK 0 AND TAKE ONE MISSIONARY INTO BOAT AT 0
+    l=len(case)
+    for i in range(0,l): 
+        z=case[i]
+        k=[0,0,0,0,0,0,0]
+        k[0]=z[0]
+        k[1]=z[1]
+        k[2]=z[2]
+        k[4]=z[4]
+        k[6]=z[6]
+        if z[3]==2 and z[6]>0:
+            k[3]=z[3]-2
+            k[5]=z[5]+2
+            k[6]=z[6]-1
+            k[4]=z[4]+1
+            if (k not in case) and (k[0]+k[3]+k[5])==3 and (k[1]+k[4]+k[6])==3:
+                case.append(k)
+                graph.n=graph.n+1
+                obj[graph.n]=graph()
+                obj[graph.n].C1=k[0]
+                obj[graph.n].M1=k[1]
+                obj[graph.n].Bank=k[2]
+                obj[graph.n].B1=k[3]
+                obj[graph.n].B2=k[4]
+                obj[graph.n].C2=k[5]
+                obj[graph.n].M2=k[6]
+                parent=i
+                obj[graph.n].p=parent
+            
+def put_2C_1M_at_1(parent=int()): # DROP TWO CANNIBALS TO BANK 1 AND TAKE ONE MISSIONARY INTO BOAT AT 1
+    l=len(case)
+    for i in range(0,l): 
+        z=case[i]
+        k=[0,0,0,0,0,0,0]
+        k[2]=z[2]
+        k[6]=z[6]
+        if z[3]==2 and z[1]>0:
+            k[0]=z[0]+2
+            k[4]=z[4]+1
+            k[1]=z[1]-1
+            k[3]=z[3]-2
+            if (k not in case) and (k[0]+k[3]+k[5])==3 and (k[1]+k[4]+k[6])==3:
+                case.append(k)
+                graph.n=graph.n+1
+                obj[graph.n]=graph()
+                obj[graph.n].C1=k[0]
+                obj[graph.n].M1=k[1]
+                obj[graph.n].Bank=k[2]
+                obj[graph.n].B1=k[3]
+                obj[graph.n].B2=k[4]
+                obj[graph.n].C2=k[5]
+                obj[graph.n].M2=k[6]
+                parent=i
+                obj[graph.n].p=parent
+            
+#ALL POSSIBLE CASES AND OBJECT
+for i in range(0,4):
+    CM()
+    MM()
+    CC()
+    to_another_bank()
+    put_cannibal_at_0()
+    put_missionary_at_0()
+    put_2C_1M_at_0()
+    put_2M_1C_at_0()
+    put_missionary_at_1()
+    put_cannibal_at_1()
+    put_2C_1M_at_1()  
+    put_2M_1C_at_1()
+obj
+
+#FINDING THE PATH ACCORDING TO MOVE
+for i in obj: #ACCORDING TO CASE=[3,3,1,0,0,0,0]
+    if obj[i].C1==0 and obj[i].M1==0 and obj[i].Bank==0 and obj[i].B1==0 and obj[i].B2==1 and obj[i].C2==3 and obj[i].M2==2:
+        temp=i
+
+graph.n=temp
+print("Showest path between(down to up): ")
+print(0,0,0,0,0,3,3)
+while obj[graph.n].p!=-1:
+    print(obj[graph.n].C1,obj[graph.n].M1,obj[graph.n].Bank,obj[graph.n].B1,obj[graph.n].B2,obj[graph.n].C2,obj[graph.n].M2)
+    graph.n=obj[graph.n].p
+print(obj[graph.n].C1,obj[graph.n].M1,obj[graph.n].Bank,obj[graph.n].B1,obj[graph.n].B2,obj[graph.n].C2,obj[graph.n].M2)
