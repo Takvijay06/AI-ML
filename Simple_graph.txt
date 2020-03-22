@@ -1,0 +1,29 @@
+# CREATE GRAPH USING STATIC DICTIONARY
+
+d={(0,1):3}
+d
+def addnode(u,v):
+    l=len(d)
+    if l == 0:
+        d[u]=[v]
+    else:
+        if u not in d.keys():
+            if v==0:
+                d[u]=[]
+            else:
+                d[u]=[v]
+        else:
+            d[u].insert(l,v)
+
+def genEdge(d):
+    edges=[]
+    for key in d:
+        for value in d[key]:
+            edges.append((key,value))
+    return edges
+
+addnode(1,2)
+addnode(1,3)
+addnode(2,4)
+addnode(4,3)
+addnode(3,0)
